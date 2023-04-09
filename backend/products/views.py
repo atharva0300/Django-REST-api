@@ -77,6 +77,9 @@ product_create_api_view = ProductCreateApiView.as_view()
 # post method tries to create something 
 # the get method tries to list something
 
+
+# creating an alt view to handle both the create and list/detail view which
+# we have created above
 @api_view(["GET", "POST"])
 def product_alt_view(request , pk = None , *args , **kwargs) : 
     method = request.method
@@ -136,4 +139,49 @@ def product_alt_view(request , pk = None , *args , **kwargs) :
         
         return Response({"invalid" : "not good data"} , status = 400)
     
-            
+
+
+
+class ProductUpdateView(generics.UpdateAPIView) : 
+
+    queryset = Product.objects.all()
+
+    serializer_class = ProductSerializer
+
+    # lookup for pk ? 
+    lookup_field = 'pk'
+
+    # performing an update 
+    def perform_update(self, serializer):
+        instance = serializer.save()
+
+        if not instance.content : 
+            instance.content = instance.title
+            ## not saving it initially 
+
+        
+
+
+product_update_view = ProductUpdateView.as_view()
+
+
+class ProductDestroyView(generics.DestroyAPIView) : 
+
+    queryset = Product.objects.all()
+
+    serializer_class = ProductSerializer
+
+    # lookup for pk ? 
+    lookup_field = 'pk'
+
+    # performing an update 
+    def perform_destroy(self, instance):
+        # instance 
+        super().perform_destroy(instance)
+
+        
+
+
+product_destroy_view = ProductDestroyView.as_view()
+
+
