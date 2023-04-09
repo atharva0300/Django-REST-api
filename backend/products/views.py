@@ -14,6 +14,9 @@ from django.shortcuts import get_object_or_404
 # importing app_view 
 from rest_framework.decorators import api_view
 
+# importing the mixins 
+from rest_framework import mixins
+
 # Create your views here.
 class ProductDetailApiView(generics.RetrieveAPIView) : 
     # inheriting the retrive view 
@@ -53,6 +56,10 @@ class ProductDetailListApiView(generics.ListAPIView) :
     queryset = Product.objects.all()
 
     serializer_class = ProductSerializer
+
+    def post(self , request , *args , **kwargs) :    # HTTP -> post 
+        return self.list(request  , *args , **kwargs)
+        # returning the list of the requet , args and kwargs 
 
 
 product_detail_list_api_view = ProductDetailListApiView.as_view()
@@ -184,4 +191,52 @@ class ProductDestroyView(generics.DestroyAPIView) :
 
 product_destroy_view = ProductDestroyView.as_view()
 
+# class to create an api view 
+class CreateApiView(mixins.CreateModelMixin , generics.GenericAPIView) : 
+    pass 
 
+
+# this mixin is performing all the operations 
+class ProductMixinView(mixins.CreateModelMixin , mixins.ListModelMixin , mixins.RetrieveModelMixin , generics.GenericAPIView): 
+
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    lookup_field = 'pk'
+    # setting the lookup field as the pk
+
+
+    def post(self , request , *args , **kwargs) :    # HTTP -> post 
+        return self.create(request  , *args , **kwargs)
+        # creating the list of the requet , args and kwargs 
+        # an returning it
+
+
+    def perform_create(self , serializer ) :
+        # serializer.save(user = self.request.save)
+
+        print(serializer.validated_data)
+        title = serializer.validated_data.get('title')
+        content = serializer.validated_data.get('content')
+        
+        if content is None : 
+            content = "This is a single view doing cool stuff"
+
+        serializer.save(content = content )
+
+        # sending a django signal 
+    def get(self , request , *args , **kwargs) :    # HTTP -> get 
+        print(args , kwargs)
+        pk = kwargs.get('pk')
+        # getting the value of the key pk form the kwargs ( dictionary )
+
+        if pk is not None : 
+            return self.retrieve(request , *args  , **kwargs)
+        return self.list(request  , *args , **kwargs)
+        # returning the list of the requet , args and kwargs 
+
+
+
+
+    # get post() : http -> post 
+
+product_mixin_view  = ProductMixinView.as_view()
