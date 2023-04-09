@@ -17,10 +17,33 @@ from rest_framework.decorators import api_view
 # importing the mixins 
 from rest_framework import mixins
 
+# importing authentication and permissions from rest framework 
+from rest_framework import permissions , authentication
+
 # Create your views here.
 class ProductDetailApiView(generics.RetrieveAPIView) : 
     # inheriting the retrive view 
     queryset = Product.objects.all()
+
+    # creating permission classes 
+
+    authentication_classes = [authentication.SessionAuthentication]
+    # the authentication.SessionAuthentication will check authentication for the user for the session
+
+    # a look into "Session Authentication and Permissions"
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    # a builtin list to manage permissions
+    # setting the permission as it Authenticated
+    # permissions.IsAuthenticatedOrReadOnly and permission.IsAutenticated
+
+    """
+    If not authenticated, then the request api will not return anything but will return 
+    {
+    "detail": "Authentication credentials were not provided."
+    }
+    
+    """
+    
     
 
     # serializing the data in the queryset 
