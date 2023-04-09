@@ -6,6 +6,12 @@ import json
 # importign the json response library inbuilt in djangp
 from django.http import JsonResponse
 
+# importing the Product model 
+from products.models import Product\
+
+# importing a library that converts a model to a dictionry 
+from django.forms.models import model_to_dict
+
 # Create your views here.
 
 def api_home(request , *args , **kwargs) :
@@ -41,3 +47,36 @@ def api_home(request , *args , **kwargs) :
     # request.GET is already JSON serializable
 
     return JsonResponse(data)
+
+
+def api_home2(request , *args , **kwargs) : 
+
+    model_data = Product.objects.all().order_by("?").first()
+
+    data = {} # the empty dictionary 
+    if model_data : 
+        # if there is any data in the model_data
+        data['id'] = model_data.id
+        data['title'] = model_data.title 
+        data['content'] = model_data.content
+        data['price'] = model_data.price
+
+        # get a model instance 
+        # turn it into a python dictionry 
+        # return Json to my client
+
+        data2 = model_to_dict(model_data , fields = ['id' , 'title' , 'content' , 'price'])
+        # all the fields we want the API to respond with
+        return JsonResponse(data2)
+    
+    else : 
+        return JsonResponse({"message" : "There is no data"})
+    
+    # JsonResponse -> accepts a json object 
+    # HttpResponse -> accepts a string
+    
+    # to convert the dictionary( object )to a string 
+    # use json.dumps(data)
+    # json_data_str = json.dumps(data)
+
+    

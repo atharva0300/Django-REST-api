@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # adding the new app 
-    'api.apps.ApiConfig'
+    'api.apps.ApiConfig',
+    'products.apps.ProductsConfig'
 ]
 
 MIDDLEWARE = [
