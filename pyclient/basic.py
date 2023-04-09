@@ -1,5 +1,7 @@
 import requests 
 
+"""
+
 
 # creating an endpoint for the API client 
 endpoint = "https://httpbin.org/"
@@ -48,5 +50,31 @@ print(get_response.status_code)
 
 # for a page that does not exists 
 # the status code returned is 404 
-get_response  = requests.get('https://a.com')
+#get_response  = requests.get('https://a.com')
+#print(get_response.status_code)
+
+# new endpoint 
+# with Django 
+endpoint = "http://127.0.0.1:8000/"
+
+get_response = requests.get(endpoint)
+
+# printing the response 
+print(get_response.text)
+
+# printing the status code 
 print(get_response.status_code)
+
+# for the 127.0.0.1 hostname, you can write localhsot instead as well
+# 8000 is the port of the endpoint 
+# chanjing the port number will get a connetion failed error
+
+"""
+# creating a new endpoint for the api app
+endpoint = "http://127.0.0.1:8000/api/"
+
+get_response = requests.get(endpoint , params = {"product_id" : 123})
+# the params is equivalent to -> http://127.0.0.1:8000/api/?abc=123
+
+print(get_response.json())
+# this will give a json object which will have the message
