@@ -6,6 +6,11 @@ from rest_framework import generics
 from .models import Product
 from .serializers import ProductSerializer
 
+# importing the Response 
+from rest_framework.response import Response
+
+from django.shortcuts import get_object_or_404
+
 # importing app_view 
 from rest_framework.decorators import api_view
 
@@ -68,3 +73,67 @@ class ProductCreateApiView(generics.CreateAPIView) :
 
 # naming convertion
 product_create_api_view = ProductCreateApiView.as_view()
+
+# post method tries to create something 
+# the get method tries to list something
+
+@api_view(["GET", "POST"])
+def product_alt_view(request , pk = None , *args , **kwargs) : 
+    method = request.method
+
+    if method == 'GET' :    
+        # get request -> detail view 
+        # list view
+
+        if pk is not None : 
+            # then details  view
+
+            # get the object itself 
+            obj = get_object_or_404(Product , pk = pk)
+            # gives the object if it exists 
+            # else 404 error 
+
+            data = ProductSerializer(obj , many = False).data
+
+            return Response(data) 
+        
+        else : 
+            # a list view
+            pass
+
+        # create the list view
+        queryset = Product.objects.all()
+        data = ProductSerializer(queryset , many = True ).data
+        # serializing the data
+
+        return Response(data)
+
+    elif method=='POST' : 
+        
+        # if post 
+        # create an item 
+
+        serializer = ProductSerializer(data = request.data)
+        if serializer.is_valid(raise_exception=True) : 
+            # instance = serialize.save() 
+            # instance = form.save()
+
+
+            print(serializer.validated_data)
+            title = serializer.validated_data.get('title')
+            content = serializer.validated_data.get('content')
+
+            if content is None : 
+                content = title
+
+            serializer.save(content = content )
+
+            # sending a django signal 
+
+
+            print(serializer.data)
+            return Response(serializer.data)
+        
+        return Response({"invalid" : "not good data"} , status = 400)
+    
+            
