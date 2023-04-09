@@ -19,6 +19,32 @@ class ProductDetailApiView(generics.RetrieveAPIView) :
 
     # Product.objects.get(pk = 'abc')
 
+    def perform_create(self , serializer ) :
+        # serializer.save(user = self.request.save)
+
+        print(serializer.validated_data)
+        title = serializer.validated_data.get('title')
+        content = serializer.validated_data.get('content')
+        
+        if content is None : 
+            content = title
+
+        serializer.save(content = content )
+
+        # sending a django signal 
+        
+
 
 # converting the class to a view
 product_detail_view = ProductDetailApiView.as_view()
+
+
+class ProductCreateApiView(generics.CreateAPIView) : 
+    queryset = Product.objects.all() 
+
+    serializer_class = ProductSerializer
+
+
+
+# naming convertion
+product_create_api_view = ProductCreateApiView.as_view()

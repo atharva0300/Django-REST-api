@@ -1,9 +1,14 @@
 import requests 
 
 # creating a new endpoint for the api app
-endpoint = "http://127.0.0.1:8000/api/products/1/"
+endpoint = "http://127.0.0.1:8000/api/products/"
 
-get_response = requests.get(endpoint , params = {"product_id" : 123})
+data = {
+    'title' : 'Field is done',
+    'price' : 32.99
+}
+
+get_response = requests.post(endpoint , json = data)
 # the params is equivalent to -> http://127.0.0.1:8000/api/?abc=123
 
 # the get method and the post method requests can also be sent using 
