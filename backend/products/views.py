@@ -6,6 +6,9 @@ from rest_framework import generics
 from .models import Product
 from .serializers import ProductSerializer
 
+# importing app_view 
+from rest_framework.decorators import api_view
+
 # Create your views here.
 class ProductDetailApiView(generics.RetrieveAPIView) : 
     # inheriting the retrive view 
@@ -32,11 +35,28 @@ class ProductDetailApiView(generics.RetrieveAPIView) :
         serializer.save(content = content )
 
         # sending a django signal 
-        
+
+    
+class ProductDetailListApiView(generics.ListAPIView) : 
+    """
+    
+    Not gonna use this method
+    
+    because we can inherit ListCreateApiView in the above class 
+    
+    """
+    queryset = Product.objects.all()
+
+    serializer_class = ProductSerializer
+
+
+product_detail_list_api_view = ProductDetailListApiView.as_view()
+
 
 
 # converting the class to a view
 product_detail_view = ProductDetailApiView.as_view()
+
 
 
 class ProductCreateApiView(generics.CreateAPIView) : 

@@ -64,7 +64,7 @@ def api_home(request , *args , **kwargs) :
 
 
 # mentioning that it is an API view
-@ api_view(['POST'])
+@api_view(['POST' , 'GET'])
 # this allows only the POST method to access the function 
 # listing all the methods that we require we mention in an array       
 def api_home2(request , *args , **kwargs) : 
@@ -74,11 +74,10 @@ def api_home2(request , *args , **kwargs) :
 
     """
 
-    """
-    if request.method!='POST': 
-        return Response({'detail' : 'GET not allowed'} , status=405)
-        # we return a json response along with the status code
-    """
+    #if request.method!='POST': 
+    #    return Response({'detail' : 'GET not allowed'} , status=405)
+    #    we return a json response along with the status code
+    
 
     data = request.data 
     # getting the data from the request 
