@@ -12,8 +12,20 @@ from products.models import Product\
 # importing a library that converts a model to a dictionry 
 from django.forms.models import model_to_dict
 
+# importing the response class from the dango rest framework 
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+# api_view is a decorator
+
+# importing the Product Serializer
+from products.serializers import ProductSerializer
+
+
 # Create your views here.
 
+# mentioning that it is an API view
+@ api_view(['POST' , 'GET'])
+# listing all the methods that we require we mention in an array        
 def api_home(request , *args , **kwargs) :
     # request -> http request instance from django 
     # print(dir(request))       # this will give the body of the request
@@ -49,25 +61,49 @@ def api_home(request , *args , **kwargs) :
     return JsonResponse(data)
 
 
-def api_home2(request , *args , **kwargs) : 
 
-    model_data = Product.objects.all().order_by("?").first()
+
+# mentioning that it is an API view
+@ api_view(['POST' , 'GET'])
+# listing all the methods that we require we mention in an array       
+def api_home2(request , *args , **kwargs) : 
+    """
+    
+    DRF API View
+
+    """
+
+    """
+    if request.method!='POST': 
+        return Response({'detail' : 'GET not allowed'} , status=405)
+        # we return a json response along with the status code
+    """
+
+    instance = Product.objects.all().order_by("?").first()
+    # the instance is the model data
 
     data = {} # the empty dictionary 
-    if model_data : 
+    if instance : 
         # if there is any data in the model_data
-        data['id'] = model_data.id
-        data['title'] = model_data.title 
-        data['content'] = model_data.content
-        data['price'] = model_data.price
+        data['id'] = instance.id
+        data['title'] = instance.title 
+        data['content'] = instance.content
+        data['price'] = instance.price
 
         # get a model instance 
         # turn it into a python dictionry 
         # return Json to my client
 
-        data2 = model_to_dict(model_data , fields = ['id' , 'title' , 'content' , 'price'])
+        data2 = model_to_dict(instance , fields = ['id' , 'title' , 'content' , 'price' , 'sale_price'])
+        # adding the sale_price does not show int he API result 
+        # this is one of the reason to use serializer
+
+        data3 = ProductSerializer(instance).data
+        # getting the contents ( all the data ) in a serialized way 
+        # this will also show the sale price and get discount
+
         # all the fields we want the API to respond with
-        return JsonResponse(data2)
+        return JsonResponse(data3)
     
     else : 
         return JsonResponse({"message" : "There is no data"})
