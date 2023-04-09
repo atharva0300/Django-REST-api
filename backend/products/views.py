@@ -31,10 +31,11 @@ class ProductDetailApiView(generics.RetrieveAPIView) :
     # the authentication.SessionAuthentication will check authentication for the user for the session
 
     # a look into "Session Authentication and Permissions"
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly , permissions.DjangoModelPermissions]
     # a builtin list to manage permissions
     # setting the permission as it Authenticated
     # permissions.IsAuthenticatedOrReadOnly and permission.IsAutenticated
+    # providing DjangoModelPermission as well 
 
     """
     If not authenticated, then the request api will not return anything but will return 
