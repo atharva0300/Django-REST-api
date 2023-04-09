@@ -13,7 +13,7 @@ class ProductSerializer(serializers.ModelSerializer) :
     # allowing the discount to point to get_discount 
     my_discount = serializers.SerializerMethodField(read_only = True )
     # set the read_only to True 
-    
+
     class Meta : 
         model = Product
 
@@ -29,9 +29,26 @@ class ProductSerializer(serializers.ModelSerializer) :
         print(obj.id)
         # printing the id of the object ( the record )
 
+        try : 
+            return obj.get_discount()
+        
+        except : 
+            return None
 
         return obj.get_discount()
         # this will make it point 
 
         # NOTE that any other name like just 'discount' will get error 
         # it should be <str>_discoount because it is similar to get_discount
+
+        """
+        
+        if not hasttr(obj , 'id') : 
+            return None 
+        
+        if not isinstance(obj , Product) : 
+            return None
+        
+        # both of the above condition checks if the error -> does not have the attribute get_discount occurs 
+        
+        """

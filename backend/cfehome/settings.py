@@ -40,7 +40,11 @@ INSTALLED_APPS = [
 
     # adding the new app 
     'api.apps.ApiConfig',
-    'products.apps.ProductsConfig'
+    'products.apps.ProductsConfig',
+
+
+    # adding the rest framework 
+    'rest_framework'
 ]
 
 MIDDLEWARE = [

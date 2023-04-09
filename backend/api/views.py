@@ -64,7 +64,8 @@ def api_home(request , *args , **kwargs) :
 
 
 # mentioning that it is an API view
-@ api_view(['POST' , 'GET'])
+@ api_view(['POST'])
+# this allows only the POST method to access the function 
 # listing all the methods that we require we mention in an array       
 def api_home2(request , *args , **kwargs) : 
     """
@@ -78,6 +79,10 @@ def api_home2(request , *args , **kwargs) :
         return Response({'detail' : 'GET not allowed'} , status=405)
         # we return a json response along with the status code
     """
+
+    data = request.data 
+    # getting the data from the request 
+
 
     instance = Product.objects.all().order_by("?").first()
     # the instance is the model data
@@ -103,6 +108,10 @@ def api_home2(request , *args , **kwargs) :
         # this will also show the sale price and get discount
 
         # all the fields we want the API to respond with
+
+
+
+
         return JsonResponse(data3)
     
     else : 
@@ -115,4 +124,21 @@ def api_home2(request , *args , **kwargs) :
     # use json.dumps(data)
     # json_data_str = json.dumps(data)
 
+
+    """
+    
+    serializer = ProductSerializer(data = request.data)
+    # it makes sure that the data that is being sent in ( injeced )
+    # is formatted
+
+    if serializer.is_valid() : 
+    # this checks it the data is formatted
+        print(serializer.data)
+        data = serializer.data
+        return Response(data)
+        
+        # if the error -> data is not serializable occurs, then we will have to return 
+        return Response(serializer.data)
+    
+    """
     
