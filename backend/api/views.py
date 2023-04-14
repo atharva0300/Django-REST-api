@@ -2,13 +2,16 @@ from django.shortcuts import render
 
 # Create your views here.
 # designing the api endpoint view 
-from django.http import JsonResponse
+from django.http import JsonResponse , HttpResponse
 
 # to convert the bytestring to json 
 import json
 
 # importing product model
 from products.models import Product
+
+# model to dict 
+from django.forms.models import model_to_dict
 
 def api_home(request , *args , **kwargs) :
 
@@ -17,18 +20,33 @@ def api_home(request , *args , **kwargs) :
     data = {} 
 
     if model_data : 
+        """
         data['id'] = model_data.id  # adding the id provided by the model ( this is not developer defined and automatically created by Django )
         data['title'] = model_data.title
         data['content'] = model_data.content
         data['price'] = model_data.price
 
+        """
         # model instance ( model_data )
         # turn a python dict
         # serialization
         # return the data to the client 
 
-    return JsonResponse(data)
+        # using model_to_dict 
+        data = model_to_dict(model_data , fields =['id' , 'title' ,  'price'])
+        # which fields to convert to dict is mentioned in fields 
 
+        # httpresponse => accepts a string 
+        # jsonresponse => accepts a json data
+
+        # converting the json to string 
+        # json_data_str = json.dumps(data)
+
+    return JsonResponse(data)
+    
+    # return HttpResponse(json_data_str , headers = {'content-type' : 'application/json'})
+
+    # to change the http response to json data -> HttpResponse(data , headers = {'content-type' : 'application/json'})
     """
     
     # request -> HttpRequest -> Django

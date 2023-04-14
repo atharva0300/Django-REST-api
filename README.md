@@ -7,7 +7,7 @@
 - [X]  Create your first API View
 - [X]  Echo GET Data
 - [X]  Django Model Instance as API Response
-- [ ]  Django Model Instance to Dictionary
+- [X]  Django Model Instance to Dictionary
 - [ ]  Rest Framework View & Response
 - [ ]  Django Rest Framework Model Serializers
 - [ ]  Ingest Data with Django Rest Framework Views
