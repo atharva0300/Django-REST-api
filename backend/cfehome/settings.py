@@ -45,7 +45,10 @@ INSTALLED_APPS = [
     'products.apps.ProductsConfig',
 
     # adding the djando rest framework
-    'rest_framework'
+    'rest_framework',
+
+    # add auth token
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [

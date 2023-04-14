@@ -20,7 +20,7 @@
 - [X]  Session Authentication & Permissions
 - [X]  User & Group Permissions with DjangoModelPermissions 
 - [X] Custom Permissions
-- [ ]  Token Authentication
+- [X]  Token Authentication
 - [ ]  Default Django Rest Framework Settings
 - [ ]  Using Mixins for Permissions
 - [ ]  ViewSets & Routers

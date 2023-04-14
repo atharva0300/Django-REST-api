@@ -16,6 +16,9 @@ from django.shortcuts import get_object_or_404
 # importing the custom permissions
 from .permissions import IsStaffEditorPermission
 
+# importing the custom authentication over here
+from api.authentication import TokenAuthentication 
+
 
 # creating a ProductDetailAPIView
 class ProductDetailAPIView(generics.RetrieveAPIView) : 
@@ -58,9 +61,10 @@ class ProductListCreateAPIView(generics.ListCreateAPIView) :
     # permissions.IsAuthenticatedOrReadOnly -> if not authenticated -> can only use the get method and not the post method
     # IsStaffEditorPermission -> custom made permissions in the permissions.py file
 
-    authentication_classes = [authentication.SessionAuthentication]
+    authentication_classes = [authentication.SessionAuthentication , TokenAuthentication]
     # provides session authentication
     # this gives the permission to create new item in the browser. ( if there is any create form )
+    # adding token authentication
 
     def perform_create(self ,serializer) :
         serializer.save()
