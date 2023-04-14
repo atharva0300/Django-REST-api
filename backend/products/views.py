@@ -14,8 +14,7 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 
 # importing the custom permissions
-from ..api.permissions import IsStaffEditorPermission
-
+from api.permissions import IsStaffEditorPermission
 # importing the custom authentication over here
 from api.authentication import TokenAuthentication 
 

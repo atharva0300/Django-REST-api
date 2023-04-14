@@ -23,7 +23,7 @@
 - [X]  Token Authentication
 - [X]  Default Django Rest Framework Settings
 - [X]  Using Mixins for Permissions
-- [ ]  ViewSets & Routers
+- [X]  ViewSets & Routers
 - [ ]  URLs, Reverse, & Serializers
 - [ ]  Model Serializer Create & Update Methods
 - [ ] Custom Validation with Serializers

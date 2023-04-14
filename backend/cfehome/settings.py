@@ -137,12 +137,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # adding the settings for REST FRAMEWORK
 REST_FRAMEWORK = {
+    """
     "DEFAULT_AUTHENTICATION_CLASSES" : [
     # WRITING THE DEFAULT AUTHENTICATION FOR ALL THE VIEWS 
+        "rest_framework.authentication.TokenAuthentication",
         "rest_framework.authentication.SessionAuthentication",
-        "api.authentication.TokenAuthentication"
+        "api.authentication.TokenAuthentication",
+        "rest_framework.authentication.IsAuthenticatedOrReadOnly"
     
     ],
+    """
     "DEFAULT_PERMISSION_CLASSES" : [
     # writing the Permission class for ALL THE VIEWS
         "rest_framework.authentication.IsAuthenticatedOrReadOnly",      # ONLY GET
