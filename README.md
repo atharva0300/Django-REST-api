@@ -14,7 +14,7 @@
 - [X]  Django Rest Framework Generics RetrieveAPIView
 - [X]  Django Rest Framework CreateAPIView
 - [X]  Django Rest Framework ListAPIView & ListCreateAPIView
-- [ ]  Using Function Based Views For Create Retrieve or List
+- [X]  Using Function Based Views For Create Retrieve or List
 - [ ]  UpdateAPIView & DestroyAPIView
 - [ ]  Mixins and a Generic API View
 - [ ]  Session Authentication & Permissions
