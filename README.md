@@ -8,7 +8,7 @@
 - [X]  Echo GET Data
 - [X]  Django Model Instance as API Response
 - [X]  Django Model Instance to Dictionary
-- [ ]  Rest Framework View & Response
+- [X]  Rest Framework View & Response
 - [ ]  Django Rest Framework Model Serializers
 - [ ]  Ingest Data with Django Rest Framework Views
 - [ ]  Django Rest Framework Generics RetrieveAPIView

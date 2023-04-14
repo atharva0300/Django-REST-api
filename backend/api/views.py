@@ -10,10 +10,31 @@ import json
 # importing product model
 from products.models import Product
 
+# to convert the api_vieew to a REST framework API view 
+# we import 2 things -> Response and APIView 
+# and apply to it
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+
 # model to dict 
 from django.forms.models import model_to_dict
 
+
+@api_view(['GET', 'POST'])
+# the api_view(['GET']) -> means that only GET method is allowed 
+# the api_view(['POST']) -> means that only POST method is allowed 
+# the api_view(['GET, POST']) -> means that only GET and POST method is allowed 
 def api_home(request , *args , **kwargs) :
+    """
+    
+    DRF API view
+    
+    """
+
+    if request.method=='POST' : 
+        # handling post requests
+        return Response({'detail' : 'This is a POST method response'} , status = 405)
+    
 
     model_data = Product.objects.all().order_by("?").first()
 
@@ -42,7 +63,10 @@ def api_home(request , *args , **kwargs) :
         # converting the json to string 
         # json_data_str = json.dumps(data)
 
-    return JsonResponse(data)
+    return Response(data)
+ 
+    # we use Response(data) -> when using REST API 
+    # we use JsonResponse(data) -> when we want tp send an object but it is not a REST API
     
     # return HttpResponse(json_data_str , headers = {'content-type' : 'application/json'})
 
