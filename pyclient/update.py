@@ -1,15 +1,14 @@
 import requests
 
-endpoint = "http://127.0.0.1:8001/api/products/"
-
+endpoint = "http://127.0.0.1:8001/api/products/1/update/"
 
 data = {
-    'title' : 'Hello Old friend'
+    'title' : 'Hello Friend',
+    'price' : 123.12
 }
 
-
-get_response = requests.post(endpoint , json = data)    # emulate a http get request
-# using get method
+get_response = requests.put(endpoint , json = data)    # emulate a http get request
+# using put method
 
 
 print()

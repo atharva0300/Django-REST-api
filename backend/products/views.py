@@ -148,3 +148,53 @@ def product_alt_view(request , pk = None,  *args , **kwargs) :
         return Response({"invlid" : "Not a good data"} , status = 400)
 
 
+
+
+# creating a ProductDetailAPIView
+class ProductUpdateAPIView(generics.UpdateAPIView) : 
+    
+    # get the queryset 
+    queryset = Product.objects.all()
+
+    # creating a product serializer
+    serializer_class = ProductSerializer
+
+    lookup_field = 'pk'
+    # specifying the lookup field
+
+    def perform_update(self , serializer) : 
+        instance = serializer.save()
+        # saving the serializer
+
+        if not instance.content : 
+            instance.content = instance.title 
+            # if the content it blank, then set it the same as the title
+
+
+
+product_update_view = ProductUpdateAPIView.as_view()
+# this will convert the class api view as a Django understandable view 
+
+
+
+# creating a ProductDetailAPIView
+class ProductDestroyAPIView(generics.DestroyAPIView) : 
+    
+    # get the queryset 
+    queryset = Product.objects.all()
+
+    # creating a product serializer
+    serializer_class = ProductSerializer
+
+    lookup_field = 'pk'
+
+    def perform_destroy(self , instance) : 
+        # instance 
+
+        # destroying ( deleting ) the item
+        super().perform_destroy(instance)
+    
+
+
+product_destroy_view = ProductDestroyAPIView.as_view()
+# this will convert the class api view as a Django understandable view 
