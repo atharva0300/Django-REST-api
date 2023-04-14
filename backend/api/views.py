@@ -7,7 +7,7 @@ import json
 from django.http import JsonResponse
 
 # importing the Product model 
-from products.models import Product\
+from products.models import Product
 
 # importing a library that converts a model to a dictionry 
 from django.forms.models import model_to_dict

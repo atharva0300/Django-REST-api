@@ -20,6 +20,9 @@ from rest_framework import mixins
 # importing authentication and permissions from rest framework 
 from rest_framework import permissions , authentication
 
+# importing custom permissions 
+from .permissions import IsStaffEditorPermission
+
 # Create your views here.
 class ProductDetailApiView(generics.RetrieveAPIView) : 
     # inheriting the retrive view 
@@ -31,11 +34,14 @@ class ProductDetailApiView(generics.RetrieveAPIView) :
     # the authentication.SessionAuthentication will check authentication for the user for the session
 
     # a look into "Session Authentication and Permissions"
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly , permissions.DjangoModelPermissions]
+    #permission_classes = [permissions.IsAuthenticatedOrReadOnly , permissions.DjangoModelPermissions]
+    permission_classes = [permissions.IsAdminUser , IsStaffEditorPermission,]
     # a builtin list to manage permissions
     # setting the permission as it Authenticated
     # permissions.IsAuthenticatedOrReadOnly and permission.IsAutenticated
     # providing DjangoModelPermission as well 
+
+    # the ordering of the permission also matters -> admin , staff 
 
     """
     If not authenticated, then the request api will not return anything but will return 
