@@ -17,7 +17,7 @@
 - [X]  Using Function Based Views For Create Retrieve or List
 - [X]  UpdateAPIView & DestroyAPIView
 - [X]  Mixins and a Generic API View
-- [ ]  Session Authentication & Permissions
+- [X]  Session Authentication & Permissions
 - [ ]  User & Group Permissions with DjangoModelPermissions 
 - [ ] Custom Permissions
 - [ ]  Token Authentication

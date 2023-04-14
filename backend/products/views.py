@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
-from rest_framework import generics, mixins
+from rest_framework import generics, mixins, permissions, authentication
 
 from .models import Product
 from .serializers import ProductSerializer
@@ -26,6 +26,13 @@ class ProductDetailAPIView(generics.RetrieveAPIView) :
     # lookup_field = 'pk'
     # Product.objects.get(pk = 2)
 
+    #permission_classes = [permissions.IsAuthenticated]
+    # permissions.IsAuthenticated -> if not authenticated -> cannot use the get or the post method 
+    # permissions.IsAuthenticatedOrReadOnly -> if not authenticated -> can only use the get method and not the post method
+
+    authentication_classes = [authentication.SessionAuthentication]
+    # provides session authentication
+
 
 product_detail_api_view = ProductDetailAPIView.as_view()
 # this will convert the class api view as a Django understandable view 
@@ -41,6 +48,15 @@ class ProductListCreateAPIView(generics.ListCreateAPIView) :
 
     serializer_class = ProductSerializer
     # getting the Product Serializer 
+
+
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    # permissions.IsAuthenticated -> if not authenticated -> cannot use the get or the post method 
+    # permissions.IsAuthenticatedOrReadOnly -> if not authenticated -> can only use the get method and not the post method
+
+    authentication_classes = [authentication.SessionAuthentication]
+    # provides session authentication
+    # this gives the permission to create new item in the browser. ( if there is any create form )
 
     def perform_create(self ,serializer) :
         serializer.save()

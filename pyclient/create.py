@@ -2,6 +2,9 @@ import requests
 
 endpoint = "http://127.0.0.1:8001/api/products/"
 
+# going to admin and logging in
+# session -> post data
+
 
 data = {
     'title' : 'Hello Old friend'
