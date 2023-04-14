@@ -18,9 +18,10 @@ endpoint = "https://httpbin.org/anything"
 # the api uses HTTP request. The python request does the http request for us
 
 # new endpoint for django
-endpoint = "http://127.0.0.1:8001/api"
+endpoint = "http://127.0.0.1:8001/api/"
 
-get_response = requests.get(endpoint)    # emulate a http get request
+get_response = requests.get(endpoint , params = {"abc" : 123} , json = {"name" : "Atharva"})    # emulate a http get request
+# passing the params to the api endpoint
 
 #print(get_response.text)    # displaying the body of the response ( the text )
 

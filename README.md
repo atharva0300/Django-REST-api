@@ -5,7 +5,7 @@
 
 - [X]  Creating a Python API Client
 - [X]  Create your first API View
-- [ ]  Echo GET Data
+- [X]  Echo GET Data
 - [ ]  Django Model Instance as API Response
 - [ ]  Django Model Instance to Dictionary
 - [ ]  Rest Framework View & Response
