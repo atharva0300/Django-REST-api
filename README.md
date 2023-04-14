@@ -12,7 +12,7 @@
 - [X]  Django Rest Framework Model Serializers
 - [X]  Ingest Data with Django Rest Framework Views
 - [X]  Django Rest Framework Generics RetrieveAPIView
-- [ ]  Django Rest Framework CreateAPIView
+- [X]  Django Rest Framework CreateAPIView
 - [ ]  Django Rest Framework ListAPIView & ListCreateAPIView
 - [ ]  Using Function Based Views For Create Retrieve or List
 - [ ]  UpdateAPIView & DestroyAPIView
