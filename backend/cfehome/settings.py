@@ -40,6 +40,9 @@ INSTALLED_APPS = [
 
     # adding the api app
     'api.apps.ApiConfig',
+
+    # adding the product app
+    'products.apps.ProductsConfig'
 ]
 
 MIDDLEWARE = [
