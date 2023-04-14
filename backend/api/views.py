@@ -35,8 +35,30 @@ def api_home(request , *args , **kwargs) :
     """
 
     if request.method=='POST' : 
+        print('inside post request')
         # handling post requests
-        return Response({'detail' : 'This is a POST method response'} , status = 405)
+        serializer = ProductSerializer(data = request.data)
+        # passing the request data in the serializer 
+
+        if serializer.is_valid(raise_exception=True) : 
+            print('serializer is valid')
+            # checking if it matches if this data is formatted
+
+            # saving the serialized data 
+            serializer.save()
+            # this will save the instance
+            # without saving tteh serializer, the instance methods and properties do not get applied 
+            # ie -> it will show the data for all the selected fields 
+            # it has all the other data for us like -> my_discount, get_discount , sale_price , content , price -> when when 
+            # we haven't passed these values 
+            # obtaining the saved instance => instance = serializer.save()
+            data = serializer.data
+            print(serializer.data)
+
+
+            return Response(data , status = 200)
+        
+        return Response({'invalid' : 'Not good Data'} , status = 400)
     
 
     #model_data = Product.objects.all().order_by("?").first()

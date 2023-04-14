@@ -42,7 +42,10 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
 
     # adding the product app
-    'products.apps.ProductsConfig'
+    'products.apps.ProductsConfig',
+
+    # adding the djando rest framework
+    'rest_framework'
 ]
 
 MIDDLEWARE = [

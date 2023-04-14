@@ -1,0 +1,2 @@
+1. You don't need a csrf cookie for API View ( for the rest framework )
+but inside normal Django, you need that to be set compulsarily

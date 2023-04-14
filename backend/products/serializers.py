@@ -38,7 +38,21 @@ class ProductSerializer(serializers.ModelSerializer) :
     # the funciton name can only be -> 'get_<something>_discount'
     # so that Django can identify the correct function 
     def get_my_discount(self , obj) : 
-        print(obj.id)
-        # if we had a obj.user -> we can grab that 
-        # or obj.foreignkey -> we can grab that
-        return obj.get_discount()
+        
+        if not hasattr(obj , 'id') : 
+            # checking if the 'id' attribute is received by the client 
+            return None
+        
+        if not isinstance(obj , Product) : 
+            # checking if the instance is the child instance of the Product model or not
+            return None
+        
+        try : 
+            print(obj.id)
+            # if we had a obj.user -> we can grab that 
+            # or obj.foreignkey -> we can grab that
+            return obj.get_discount()
+        except : 
+            pass 
+
+    

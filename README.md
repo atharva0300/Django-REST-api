@@ -10,7 +10,7 @@
 - [X]  Django Model Instance to Dictionary
 - [X]  Rest Framework View & Response
 - [X]  Django Rest Framework Model Serializers
-- [ ]  Ingest Data with Django Rest Framework Views
+- [X]  Ingest Data with Django Rest Framework Views
 - [ ]  Django Rest Framework Generics RetrieveAPIView
 - [ ]  Django Rest Framework CreateAPIView
 - [ ]  Django Rest Framework ListAPIView & ListCreateAPIView
