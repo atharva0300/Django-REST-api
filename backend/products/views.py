@@ -14,10 +14,13 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 
 # importing the custom permissions
-from .permissions import IsStaffEditorPermission
+from ..api.permissions import IsStaffEditorPermission
 
 # importing the custom authentication over here
 from api.authentication import TokenAuthentication 
+
+# importing the permission mixin 
+from api.mixins import StaffEditorPermissionMixin
 
 
 # creating a ProductDetailAPIView
@@ -44,7 +47,7 @@ product_detail_api_view = ProductDetailAPIView.as_view()
 # this will convert the class api view as a Django understandable view 
 
 
-class ProductListCreateAPIView(generics.ListCreateAPIView) : 
+class ProductListCreateAPIView(generics.ListCreateAPIView , StaffEditorPermissionMixin) : 
     # ListCreateAPI View is a combination of both create and list APi View 
     # Create API View is called when -> the request.method is 'POST' request -> you are trying to create a new Product
     # List API View is called when -> the request.method is a 'GET' request -> you are trying to get the list of all the Products
@@ -91,7 +94,7 @@ product_list_create_api_view = ProductListCreateAPIView.as_view()
 
 
 
-class ProductListAPIView(generics.ListAPIView) : 
+class ProductListAPIView(generics.ListAPIView , StaffEditorPermissionMixin) : 
     """
     
     NOT Gonna use this method

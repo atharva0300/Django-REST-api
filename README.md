@@ -22,7 +22,7 @@
 - [X] Custom Permissions
 - [X]  Token Authentication
 - [X]  Default Django Rest Framework Settings
-- [ ]  Using Mixins for Permissions
+- [X]  Using Mixins for Permissions
 - [ ]  ViewSets & Routers
 - [ ]  URLs, Reverse, & Serializers
 - [ ]  Model Serializer Create & Update Methods
