@@ -21,5 +21,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # adding the urls.py of the api app
-    path('api/' , include('api.urls'))
+    path('api/' , include('api.urls')),
+
+    # adding the path for product urls
+    path('api/products/' , include('products.urls'))
 ]

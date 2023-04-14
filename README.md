@@ -11,7 +11,7 @@
 - [X]  Rest Framework View & Response
 - [X]  Django Rest Framework Model Serializers
 - [X]  Ingest Data with Django Rest Framework Views
-- [ ]  Django Rest Framework Generics RetrieveAPIView
+- [X]  Django Rest Framework Generics RetrieveAPIView
 - [ ]  Django Rest Framework CreateAPIView
 - [ ]  Django Rest Framework ListAPIView & ListCreateAPIView
 - [ ]  Using Function Based Views For Create Retrieve or List
