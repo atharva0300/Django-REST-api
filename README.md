@@ -21,7 +21,7 @@
 - [X]  User & Group Permissions with DjangoModelPermissions 
 - [X] Custom Permissions
 - [X]  Token Authentication
-- [ ]  Default Django Rest Framework Settings
+- [X]  Default Django Rest Framework Settings
 - [ ]  Using Mixins for Permissions
 - [ ]  ViewSets & Routers
 - [ ]  URLs, Reverse, & Serializers
