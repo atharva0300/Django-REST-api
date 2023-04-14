@@ -50,7 +50,7 @@ class ProductListCreateAPIView(generics.ListCreateAPIView) :
     # getting the Product Serializer 
 
 
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.DjangoModelPermissions]
     # permissions.IsAuthenticated -> if not authenticated -> cannot use the get or the post method 
     # permissions.IsAuthenticatedOrReadOnly -> if not authenticated -> can only use the get method and not the post method
 
@@ -174,6 +174,10 @@ class ProductUpdateAPIView(generics.UpdateAPIView) :
 
     # creating a product serializer
     serializer_class = ProductSerializer
+
+    permission_classes = [permissions.DjangoModelPermissions]
+    # This will only give permissions to the staff user which are given by the superuser
+    
 
     lookup_field = 'pk'
     # specifying the lookup field

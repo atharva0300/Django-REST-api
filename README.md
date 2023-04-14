@@ -18,7 +18,7 @@
 - [X]  UpdateAPIView & DestroyAPIView
 - [X]  Mixins and a Generic API View
 - [X]  Session Authentication & Permissions
-- [ ]  User & Group Permissions with DjangoModelPermissions 
+- [X]  User & Group Permissions with DjangoModelPermissions 
 - [ ] Custom Permissions
 - [ ]  Token Authentication
 - [ ]  Default Django Rest Framework Settings
