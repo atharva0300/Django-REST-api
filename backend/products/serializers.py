@@ -8,12 +8,22 @@ from rest_framework import serializers
 
 from .models import Product
 
+from rest_framework.reverse import reverse
+# this allows other urls ( changed urls )
+
 class ProductSerializer(serializers.ModelSerializer) : 
 
     my_discount = serializers.SerializerMethodField(read_only = True)
+    edit_url = serializers.SerializerMethodField(read_only = True)
+    url = serializers.HyperlinkedIdentityField(
+        view_name = 'product-detail',
+        lookup_field = 'pk',
+        )
     class Meta : 
         model = Product
         fields = [
+            'url',
+            'edit_url',
             'pk',
             'title',
             'content',
@@ -57,3 +67,16 @@ class ProductSerializer(serializers.ModelSerializer) :
             pass 
 
     
+    def get_edit_url(self , obj) : 
+
+        # return f"/api/products/{obj.pk}/"
+
+        request = self.context.get('request')   # self.request
+
+        if request is None : 
+            return None
+        
+        # use it as an argument
+        return reverse("product-detail" , kwargs = {'pk' : obj.pk} ,  request = request )
+        # pk is the name of the keyword argument
+        

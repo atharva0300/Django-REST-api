@@ -24,7 +24,7 @@
 - [X]  Default Django Rest Framework Settings
 - [X]  Using Mixins for Permissions
 - [X]  ViewSets & Routers
-- [ ]  URLs, Reverse, & Serializers
+- [X]  URLs, Reverse, & Serializers
 - [ ]  Model Serializer Create & Update Methods
 - [ ] Custom Validation with Serializers
 - [ ] Request User Data & Customize View Queryset
