@@ -19,6 +19,9 @@ from rest_framework.decorators import api_view
 # model to dict 
 from django.forms.models import model_to_dict
 
+# importing serializers 
+from products.serializers import ProductSerializer
+
 
 @api_view(['GET', 'POST'])
 # the api_view(['GET']) -> means that only GET method is allowed 
@@ -36,11 +39,13 @@ def api_home(request , *args , **kwargs) :
         return Response({'detail' : 'This is a POST method response'} , status = 405)
     
 
-    model_data = Product.objects.all().order_by("?").first()
+    #model_data = Product.objects.all().order_by("?").first()
+
+    instance = Product.objects.all().order_by("?").first()
 
     data = {} 
 
-    if model_data : 
+    if instance : 
         """
         data['id'] = model_data.id  # adding the id provided by the model ( this is not developer defined and automatically created by Django )
         data['title'] = model_data.title
@@ -54,8 +59,9 @@ def api_home(request , *args , **kwargs) :
         # return the data to the client 
 
         # using model_to_dict 
-        data = model_to_dict(model_data , fields =['id' , 'title' ,  'price'])
+        # data = model_to_dict(instance , fields =['id' , 'title' ,  'price' , 'sale_price'])
         # which fields to convert to dict is mentioned in fields 
+        # the sale_price does not get added by default
 
         # httpresponse => accepts a string 
         # jsonresponse => accepts a json data
@@ -63,7 +69,10 @@ def api_home(request , *args , **kwargs) :
         # converting the json to string 
         # json_data_str = json.dumps(data)
 
-    return Response(data)
+        # BY USING SERIALIZERS ( ProductSerializer )
+        data = ProductSerializer(instance).data
+
+        return Response(data)
  
     # we use Response(data) -> when using REST API 
     # we use JsonResponse(data) -> when we want tp send an object but it is not a REST API
