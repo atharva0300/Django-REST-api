@@ -4,7 +4,7 @@
 ## Commits 
 
 - [X]  Creating a Python API Client
-- [ ]  Create your first API View
+- [X]  Create your first API View
 - [ ]  Echo GET Data
 - [ ]  Django Model Instance as API Response
 - [ ]  Django Model Instance to Dictionary
