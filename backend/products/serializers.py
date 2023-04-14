@@ -19,6 +19,10 @@ class ProductSerializer(serializers.ModelSerializer) :
         view_name = 'product-detail',
         lookup_field = 'pk',
         )
+
+    email = serializers.EmailField(write_only = True )
+    # this means that the email field data won't be showin the the product list or the product detail
+    # but it will be displayed as an input while filling the form or performing a post request
     class Meta : 
         model = Product
         fields = [
@@ -43,7 +47,10 @@ class ProductSerializer(serializers.ModelSerializer) :
             # 'my_discount'
 
             # after adding : discount = serializers.SerializerMethodField(read_only = True)
-            'my_discount'
+            'my_discount',
+
+
+            'email'
         ]
 
     # the funciton name can only be -> 'get_<something>_discount'
@@ -79,4 +86,22 @@ class ProductSerializer(serializers.ModelSerializer) :
         # use it as an argument
         return reverse("product-detail" , kwargs = {'pk' : obj.pk} ,  request = request )
         # pk is the name of the keyword argument
-        
+    
+    # overriding the default method 
+    def create(self ,validated_data) : 
+        #return Product.objects.create(**validated_data)
+        # **validated_data -> upacking the validated_data
+
+        email = validated_data.pop('email')
+        obj = super().create(validated_data)
+        print(email)
+        print(obj)
+
+        return obj
+    
+    def update(self , instance , validated_data) :
+        # instance.title = validated_data.get('title')
+        email = validated_data.pop('email')
+        return super().update(instance,  validated_data)
+    
+    # serializer.save() is equal to form.save()
