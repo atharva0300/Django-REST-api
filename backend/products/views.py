@@ -25,7 +25,10 @@ product_detail_api_view = ProductDetailAPIView.as_view()
 # this will convert the class api view as a Django understandable view 
 
 
-class ProductCreateAPIView(generics.CreateAPIView) : 
+class ProductListCreateAPIView(generics.ListCreateAPIView) : 
+    # ListCreateAPI View is a combination of both create and list APi View 
+    # Create API View is called when -> the request.method is 'POST' request
+    # List API View is called when -> the request.method is a 'GET' request 
     queryset = Product.objects.all()
 
     serializer_class = ProductSerializer
@@ -52,4 +55,36 @@ class ProductCreateAPIView(generics.CreateAPIView) :
 
 
 
-product_create_api_view = ProductCreateAPIView.as_view()
+product_list_create_api_view = ProductListCreateAPIView.as_view()
+
+
+
+class ProductListAPIView(generics.ListAPIView) : 
+    """
+    
+    NOT Gonna use this method
+
+    """
+    queryset = Product.objects.all()
+
+    serializer_class = ProductSerializer
+    # getting the Product Serializer 
+
+    def perform_create(self ,serializer) :
+        serializer.save()
+        # saving the serializer instance 
+
+        # serializer.save(user = self.request.user)
+        print(serializer.validated_data)
+        # obtaining the title form the validated data
+        title = serializer.validated_data.get('title')
+        content = serializer.validated_data.get('content')
+
+        # checking if the content is there or not ? 
+        if content is None : 
+            content = title
+        
+
+        serializer.save(content = content) 
+
+        # send a signal here ( a Django here )

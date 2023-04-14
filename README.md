@@ -13,7 +13,7 @@
 - [X]  Ingest Data with Django Rest Framework Views
 - [X]  Django Rest Framework Generics RetrieveAPIView
 - [X]  Django Rest Framework CreateAPIView
-- [ ]  Django Rest Framework ListAPIView & ListCreateAPIView
+- [X]  Django Rest Framework ListAPIView & ListCreateAPIView
 - [ ]  Using Function Based Views For Create Retrieve or List
 - [ ]  UpdateAPIView & DestroyAPIView
 - [ ]  Mixins and a Generic API View
