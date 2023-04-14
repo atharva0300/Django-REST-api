@@ -19,7 +19,7 @@
 - [X]  Mixins and a Generic API View
 - [X]  Session Authentication & Permissions
 - [X]  User & Group Permissions with DjangoModelPermissions 
-- [ ] Custom Permissions
+- [X] Custom Permissions
 - [ ]  Token Authentication
 - [ ]  Default Django Rest Framework Settings
 - [ ]  Using Mixins for Permissions

@@ -13,6 +13,9 @@ from rest_framework.response import Response
 
 from django.shortcuts import get_object_or_404
 
+# importing the custom permissions
+from .permissions import IsStaffEditorPermission
+
 
 # creating a ProductDetailAPIView
 class ProductDetailAPIView(generics.RetrieveAPIView) : 
@@ -50,9 +53,10 @@ class ProductListCreateAPIView(generics.ListCreateAPIView) :
     # getting the Product Serializer 
 
 
-    permission_classes = [permissions.DjangoModelPermissions]
+    permission_classes = [IsStaffEditorPermission , permissions.IsAdminUser]
     # permissions.IsAuthenticated -> if not authenticated -> cannot use the get or the post method 
     # permissions.IsAuthenticatedOrReadOnly -> if not authenticated -> can only use the get method and not the post method
+    # IsStaffEditorPermission -> custom made permissions in the permissions.py file
 
     authentication_classes = [authentication.SessionAuthentication]
     # provides session authentication
