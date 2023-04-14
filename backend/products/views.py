@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
-from rest_framework import generics 
+from rest_framework import generics, mixins
 
 from .models import Product
 from .serializers import ProductSerializer
@@ -198,3 +198,52 @@ class ProductDestroyAPIView(generics.DestroyAPIView) :
 
 product_destroy_view = ProductDestroyAPIView.as_view()
 # this will convert the class api view as a Django understandable view 
+
+
+class ProductMixinView(mixins.CreateModelMixin , mixins.ListModelMixin , mixins.RetrieveModelMixin , generics.GenericAPIView  ) : 
+
+    queryset = Product.objects.all()
+
+    serializer_class = ProductSerializer
+
+    lookup_field = 'pk'
+
+
+    # uses mixins.REtrieveModelMixin 
+    def get(self , request , *args, **kwargs) :     # Http -> get 
+        print(args , kwargs)
+
+        # just keeping the pk 
+        pk = kwargs.get('pk')
+
+        if pk is not None : 
+            return self.retrieve(request , *args , **kwargs)
+            
+            # returns the by defauly method by Django -> .retrieve
+        
+        # uses mixins.ListModelMixin
+        return self.list(request , *args , **kwargs)
+        # returns the by defauly method by Django -> .list
+   
+    
+
+    # uses mixins.RetrieveModelMixin
+    def post(self , request , *args , **kwargs)  : # HTTP -> post
+        return self.create(request , *args , **kwargs)
+        # returns the by defauly method by Django -> .create
+
+    # uses mixins.CreateModelMixin
+    def perform_create(self ,serializer) :
+        title = serializer.validated_data.get('title')
+        content = serializer.validated_data.get('content') or None
+
+        # checking if the content is there or not ? 
+        if content is None : 
+            content = "This is a single view doing cool stuff"
+        
+
+        serializer.save(content = content) 
+
+        # send a signal here ( a Django here )
+
+product_mixin_as_view = ProductMixinView.as_view()

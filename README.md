@@ -16,7 +16,7 @@
 - [X]  Django Rest Framework ListAPIView & ListCreateAPIView
 - [X]  Using Function Based Views For Create Retrieve or List
 - [X]  UpdateAPIView & DestroyAPIView
-- [ ]  Mixins and a Generic API View
+- [X]  Mixins and a Generic API View
 - [ ]  Session Authentication & Permissions
 - [ ]  User & Group Permissions with DjangoModelPermissions 
 - [ ] Custom Permissions
